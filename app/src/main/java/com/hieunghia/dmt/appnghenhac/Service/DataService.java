@@ -84,4 +84,9 @@ public interface DataService {
     @POST("ForgetPassWord.php")
     Call<String> GetResetPassWord(@Field("email") String email);
 
+    @FormUrlEncoded
+    @POST("searchbaihat.php")
+    Call<List<BaiHat>> GetSearchBaiHat(@Field("tukhoa") String tukhoa);
+
+
 }

@@ -25,11 +25,11 @@
 
     <TextView
         android:visibility="gone"
-        android:textColor="#fd79a8"
-        android:text="Không có dữ liệu cho bài hát"
+        android:textColor="#858585"
+        android:text="Không có kết quả phù hợp :("
         android:gravity="center"
         android:id="@+id/textviewkhongcodulieu"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
