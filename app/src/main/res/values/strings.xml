@@ -6,4 +6,6 @@
     <string name="login_name_hint">Name</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
+    <string name="login_re_password_hint">Re-Password</string>
+
 </resources>
