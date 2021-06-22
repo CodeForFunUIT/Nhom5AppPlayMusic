@@ -8,4 +8,7 @@
     <string name="login_password_hint">Password</string>
     <string name="login_re_password_hint">Re-Password</string>
 
+    <string name="facebook_app_id">525869111787324</string>
+    <string name="fb_login_protocol_scheme">fb525869111787324</string>
+
 </resources>

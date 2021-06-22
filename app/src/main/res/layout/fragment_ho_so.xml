@@ -28,15 +28,16 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageviewuser"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
         android:layout_width="126dp"
         android:layout_height="109dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        app:srcCompat="@drawable/ic_user" />
+        app:srcCompat="@drawable/ic_user"
+        tools:ignore="VectorDrawableCompat" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,7 +56,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
-            app:srcCompat="@drawable/ic_email" />
+            app:srcCompat="@drawable/ic_email"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/textviewemail"
@@ -76,7 +78,8 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="8dp"
             android:layout_below="@+id/imageviewemail"
-            app:srcCompat="@drawable/ic_phone" />
+            app:srcCompat="@drawable/ic_phone"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/textviewphone"
