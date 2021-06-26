@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
 //        mainViewPaperAdapter.addFragment(new Fragment_Thu_Vien_bai_hat(),"bai hat");
         viewPager.setAdapter(mainViewPaperAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
-        tabLayout.getTabAt(1).setIcon(R.drawable.iconsearch);
-        tabLayout.getTabAt(2).setIcon(R.drawable.iconhoso);
+        tabLayout.getTabAt(0).setIcon(R.drawable.icsearch);
+        tabLayout.getTabAt(1).setIcon(R.drawable.icontrangchu2);
+        tabLayout.getTabAt(2).setIcon(R.drawable.iconhoso2);
     }
 
     private void anhxa() {
