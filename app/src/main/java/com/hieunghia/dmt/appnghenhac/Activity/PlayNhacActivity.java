@@ -1,8 +1,9 @@
-    package com.hieunghia.dmt.appnghenhac.Activity;
+package com.hieunghia.dmt.appnghenhac.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -21,7 +22,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hieunghia.dmt.appnghenhac.Adapter.PlaynhacAdapter;
 import com.hieunghia.dmt.appnghenhac.Adapter.ViewPagerPlaylistnhac;
+import com.hieunghia.dmt.appnghenhac.Model.Audio;
 import com.hieunghia.dmt.appnghenhac.Model.BaiHat;
 import com.hieunghia.dmt.appnghenhac.R;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Dia_Nhac;
@@ -33,7 +36,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-    public class PlayNhacActivity extends AppCompatActivity {
+
+
+public class PlayNhacActivity extends AppCompatActivity {
 
     //TextView txtCasi, txttenbaihat, txtthoigianbatdau, txtthoigianketthuc;
     //ImageView imgbtnback;
@@ -46,15 +51,20 @@ import java.util.Random;
     ImageButton imgPlay, imgPre, imgNext, imgrepeat, imgrand;
     SeekBar seekbartime;
     ViewPager viewPagerplaynhac;
-    Fragment_Dia_Nhac fragment_dia_nhac;
-    Fragment_Play_Danh_Sach_Cac_Bai_Hat fragment_play_danh_sach_cac_bai_hat;
+    RecyclerView recyclerView;
+    public static Fragment_Dia_Nhac fragment_dia_nhac;
+    public Fragment_Play_Danh_Sach_Cac_Bai_Hat fragment_play_danh_sach_cac_bai_hat;
     public static ArrayList<BaiHat> mangbaihat = new ArrayList<>();
+    public static ArrayList<Audio> mangAudio = new ArrayList<>();
     public static ViewPagerPlaylistnhac adapternhac;
-    MediaPlayer mediaPlayer;
-    int position = 0;
+    public static MediaPlayer mediaPlayer;
+    public static boolean isAudio = false;
+
     boolean repeat = false;
     boolean checkrandom = false;
     boolean nextsong = false;
+    int position = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +75,6 @@ import java.util.Random;
         init();
         evenClick();
 
-
     }
 
     private void evenClick() {
@@ -75,7 +84,7 @@ import java.util.Random;
             public void run() {
                 if (adapternhac.getItem(1) != null) {
                     if (mangbaihat.size() > 0){
-                        fragment_dia_nhac.PlayNhac(mangbaihat.get(0).getHinhBaiHat());
+                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
                         // trường hợp khi run lên mà load bài hát quá lâu ko lấy đc bài hát thì hàm này sẽ đợi đến khi load đc
                         handler.removeCallbacks(this);
                     }else  {
@@ -179,7 +188,7 @@ import java.util.Random;
                             position = 0;
                         }
                         new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
-                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat());
+                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
 
                     }
@@ -226,7 +235,7 @@ import java.util.Random;
                         }
 
                         new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
-                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat());
+                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
                         UpdateSong();
                     }
@@ -243,6 +252,18 @@ import java.util.Random;
                 }, 5000);
             }
         });
+
+//        if (PlaynhacAdapter.ChangeSongTo(isChangeSong,positionListSong)){
+//            position = positionListSong;
+//            mediaPlayer.stop();
+//            mediaPlayer.release();
+//            mediaPlayer = null;
+//            imgPlay.setImageResource(R.drawable.iconpause);
+//            new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
+//            fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
+//            getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+//            UpdateSong();
+//        }
     }
 
     private void GetDataInTent() {
@@ -250,20 +271,31 @@ import java.util.Random;
         mangbaihat.clear();
         if (intent != null)
         {
+            if (intent.hasExtra("audioTrue")){
+                isAudio = intent.getBooleanExtra("audioTrue",false);
+            }
+            if (intent.hasExtra("PositionAudio")){
+                position = intent.getIntExtra("PositionAudio",0);
+            }
+            if (intent.hasExtra("cakhucAudio")){
+                mangbaihat = intent.getParcelableArrayListExtra("cakhucAudio");
+            }
             if (intent.hasExtra("cakhuc")){
                 BaiHat baiHat = intent.getParcelableExtra("cakhuc");
                 mangbaihat.add(baiHat);
             }
-            if (intent.hasExtra("cacbaihat"))
+            if (intent.hasExtra("cacbaihat"))   // điều kiện này sẽ nhận dữ liệu từ floatactionbutton và nhận tất cả bài hát trong đó.
             {
                 ArrayList<BaiHat> baiHatArrayList = intent.getParcelableArrayListExtra("cacbaihat");
                 mangbaihat = baiHatArrayList;
             }
         }
-
     }
 
+
+
     private void init() {
+//        recyclerView = findViewById(R.id.)
         toolbarplaynhac = findViewById(R.id.toobarplaynhac);
         txtTimeSong = findViewById(R.id.textviewtimesong);
         txtTotaltimesong = findViewById(R.id.textviewtotaltimesong);
@@ -282,6 +314,7 @@ import java.util.Random;
                 finish();
                 mediaPlayer.stop();
                 mangbaihat.clear();
+                isAudio = false;
             }
         });
         toolbarplaynhac.setTitleTextColor(Color.WHITE);
@@ -294,10 +327,15 @@ import java.util.Random;
         fragment_dia_nhac = (Fragment_Dia_Nhac) adapternhac.getItem(1);
         if (mangbaihat.size() > 0)
         {
-            getSupportActionBar().setTitle(mangbaihat.get(0).getTenBaiHat());
-            new PlayMp3().execute(mangbaihat.get(0).getLinkBaiHat());
+            getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+            new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
             imgPlay.setImageResource(R.drawable.iconpause);
         }
+//        if (mangAudio.size() > 0){
+//            getSupportActionBar().setTitle(mangAudio.get(position).getAudioTitle());
+//            new PlayMp3().execute(mangAudio.get(position).getAudioUri().toString());
+//            imgPlay.setImageResource(R.drawable.iconpause);
+//        }
     }
 
     class PlayMp3 extends AsyncTask<String,Void,String>{
@@ -311,17 +349,17 @@ import java.util.Random;
         protected void onPostExecute(String baihat) {
             super.onPostExecute(baihat);
             try {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    mediaPlayer.stop();
-                    mediaPlayer.reset();
-                }
-            });
-            mediaPlayer.setDataSource(baihat);
-            mediaPlayer.prepare();
+                mediaPlayer = new MediaPlayer();
+//            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
+                    }
+                });
+                mediaPlayer.setDataSource(baihat);
+                mediaPlayer.prepare();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -388,7 +426,7 @@ import java.util.Random;
                         }
 
                         new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
-                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat());
+                        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
                         getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
 
                     }

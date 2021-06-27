@@ -48,6 +48,10 @@ public class BaiHat implements Parcelable {
         }
     };
 
+    public BaiHat() {
+
+    }
+
     public String getIDBaiHat() {
         return iDBaiHat;
     }

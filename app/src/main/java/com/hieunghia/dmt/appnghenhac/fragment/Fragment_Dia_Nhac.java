@@ -35,8 +35,10 @@ public class Fragment_Dia_Nhac extends Fragment {
         objectAnimator.start();
         return view;
     }
-    public void PlayNhac(String hinhanh) {
-        Picasso.with(getActivity()).load(hinhanh).into(circleImageView);
+    public void PlayNhac(String hinhanh, boolean isAudio) {
+        if (!isAudio){
+            Picasso.with(getActivity()).load(hinhanh).into(circleImageView);
+        }
     }
 
 }
