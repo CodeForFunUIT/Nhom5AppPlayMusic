@@ -26,6 +26,7 @@ import com.hieunghia.dmt.appnghenhac.Adapter.MainViewPaperAdapter;
 import com.hieunghia.dmt.appnghenhac.Model.User;
 import com.hieunghia.dmt.appnghenhac.R;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Ho_So;
+import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Thu_Vien_bai_hat;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Tim_Kiem;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Trang_Chu;
 
@@ -77,13 +78,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void init() {
         MainViewPaperAdapter mainViewPaperAdapter = new MainViewPaperAdapter(getSupportFragmentManager());
         mainViewPaperAdapter.addFragment(new Fragment_Tim_Kiem(), "Tim Kiem");
         mainViewPaperAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chu");
         mainViewPaperAdapter.addFragment(new Fragment_Ho_So(), "Ho So");
-//        mainViewPaperAdapter.addFragment(new Fragment_Thu_Vien_bai_hat(),"bai hat");
+        mainViewPaperAdapter.addFragment(new Fragment_Thu_Vien_bai_hat(),"bai hat");
         viewPager.setAdapter(mainViewPaperAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.icsearch);
@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         progress++;
         if(progress >= 3)
             progressBar.setVisibility(View.INVISIBLE);
-
     }
 
     public String getGetName() {
