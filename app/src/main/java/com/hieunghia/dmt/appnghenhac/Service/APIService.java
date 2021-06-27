@@ -2,8 +2,8 @@ package com.hieunghia.dmt.appnghenhac.Service;
 
 public class APIService {
 
-    private static String base_url = "https://team5appplaymusic.000webhostapp.com/Server/";
-    private static String user_url = "https://filesavemusic.000webhostapp.com/Server/";
+    private static String base_url = "https://team5appplaymusic.000webhostapp.com/Server/"; // service lưu file ảnh music
+    private static String user_url = "https://filesavemusic.000webhostapp.com/Server/";  // service lưu dữ liệu account
 
     public static DataService getService() // tuong tac giua data va Client
     {

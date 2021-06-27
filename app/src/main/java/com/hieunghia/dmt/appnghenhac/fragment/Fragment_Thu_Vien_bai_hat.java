@@ -72,9 +72,7 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
         if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_DENIED){
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,},1);
-
         }
-
     }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -113,8 +111,8 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
                 if(!cursor.getString(0).equals(null)){
                     audios.add((new Audio(cursor.getString(0)
 
-                            ,cursor.getString(2)
-                            ,uri.parse(cursor.getString(1)))));
+                                          ,cursor.getString(2)
+                                          ,uri.parse(cursor.getString(1)))));
                 }
             }
             cursor.close();
