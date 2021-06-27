@@ -66,7 +66,6 @@ public class BannerAdapter extends PagerAdapter {
         });
         container.addView(view);
         return view;
-
     }
 
     // chuyển đến banner cuối cùng mà không finish sẽ bị lỗi

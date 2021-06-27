@@ -61,6 +61,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     PlayList playList;
     TheLoai theLoai;
     Album album;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,15 +178,12 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihatAdapter);
                 evenClick();
             }
-
             @Override
             public void onFailure(Call<List<BaiHat>> call, Throwable t) {
 
             }
         }));
     }
-
-
 
     private void init() {
         // calling the action bar
@@ -197,7 +195,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private void anhxa() {
@@ -227,6 +224,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
             }
         }
     }
+
     private void evenClick()
     {
         floatingActionButton.setEnabled(true);

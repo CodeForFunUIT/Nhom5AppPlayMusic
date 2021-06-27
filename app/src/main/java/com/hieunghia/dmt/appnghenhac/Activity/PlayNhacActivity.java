@@ -55,7 +55,6 @@ public class PlayNhacActivity extends AppCompatActivity {
     public static Fragment_Dia_Nhac fragment_dia_nhac;
     public Fragment_Play_Danh_Sach_Cac_Bai_Hat fragment_play_danh_sach_cac_bai_hat;
     public static ArrayList<BaiHat> mangbaihat = new ArrayList<>();
-    public static ArrayList<Audio> mangAudio = new ArrayList<>();
     public static ViewPagerPlaylistnhac adapternhac;
     public static MediaPlayer mediaPlayer;
     public static boolean isAudio = false;
