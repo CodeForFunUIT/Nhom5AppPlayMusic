@@ -26,6 +26,7 @@ import com.hieunghia.dmt.appnghenhac.Adapter.MainViewPaperAdapter;
 import com.hieunghia.dmt.appnghenhac.Model.User;
 import com.hieunghia.dmt.appnghenhac.R;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Ho_So;
+import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Nguoi_Dung;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Thu_Vien_bai_hat;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Tim_Kiem;
 import com.hieunghia.dmt.appnghenhac.fragment.Fragment_Trang_Chu;
@@ -80,15 +81,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         MainViewPaperAdapter mainViewPaperAdapter = new MainViewPaperAdapter(getSupportFragmentManager());
-        mainViewPaperAdapter.addFragment(new Fragment_Tim_Kiem(), "Tim Kiem");
-        mainViewPaperAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chu");
-        mainViewPaperAdapter.addFragment(new Fragment_Ho_So(), "Ho So");
-        mainViewPaperAdapter.addFragment(new Fragment_Thu_Vien_bai_hat(),"bai hat");
+        mainViewPaperAdapter.addFragment(new Fragment_Nguoi_Dung(),"Thiết Bị");
+        mainViewPaperAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chủ");
+        mainViewPaperAdapter.addFragment(new Fragment_Tim_Kiem(), "Tìm Kiếm");
+        mainViewPaperAdapter.addFragment(new Fragment_Ho_So(), "Hồ Sơ");
         viewPager.setAdapter(mainViewPaperAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.icsearch);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_phone);
         tabLayout.getTabAt(1).setIcon(R.drawable.icontrangchu2);
-        tabLayout.getTabAt(2).setIcon(R.drawable.iconhoso2);
+        tabLayout.getTabAt(2).setIcon(R.drawable.icsearch);
+        tabLayout.getTabAt(3).setIcon(R.drawable.iconhoso2);
+
     }
 
     private void anhxa() {
