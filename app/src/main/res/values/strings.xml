@@ -15,4 +15,6 @@
     <string name="dangnhap">Đăng nhập</string>
     <string name="dangxuat">Đăng xuất</string>
 
+    <string name="add_album">Thêm Album</string>
+
 </resources>

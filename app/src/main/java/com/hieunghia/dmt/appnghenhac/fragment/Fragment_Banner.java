@@ -65,7 +65,7 @@ public class Fragment_Banner extends Fragment {
                     public void run() {
                         currentItem = viewPager.getCurrentItem();
                         currentItem++;
-                        if (currentItem >= viewPager.getAdapter().getCount())
+                        if (currentItem >= 10)
                         {
                             currentItem = 0;
                         }
