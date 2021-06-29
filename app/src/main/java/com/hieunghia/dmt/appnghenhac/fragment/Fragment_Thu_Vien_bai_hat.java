@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Fragment_Thu_Vien_bai_hat extends Fragment {
-    public static final int PERMISSION_READ = 0;
     public static final int READ_EXTERNAL_STORAGE = 1;
     RecyclerView recyclerView;
     AudioAdapter adapter;
@@ -61,14 +60,6 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
         return view;
     }
     public void checkPermission() {
-//        int READ_EXTERNAL_PERMISSION = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
-//        int WRITE_EXTERNAL_PERMISSION = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-//        if((READ_EXTERNAL_PERMISSION != PackageManager.PERMISSION_GRANTED) && (WRITE_EXTERNAL_PERMISSION != PackageManager.PERMISSION_GRANTED)) {
-//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_READ);
-//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE);
-//            return false;
-//        }
         if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_DENIED){
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,},1);
@@ -76,17 +67,6 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
     }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case  PERMISSION_READ: {
-//                if (grantResults.length > 0 && permissions[0].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-//                    if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-//                        Toast.makeText(getContext(), "Please allow storage permission", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        getAudioFiles();
-//                    }
-//                }
-//            }
-//        }
         if(requestCode == READ_EXTERNAL_STORAGE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
@@ -117,9 +97,7 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
             }
             cursor.close();
         }
-//        for (int i = 0; i < audios.size(); i++){
-//            baiHats.add(audios.get(i).converToBaiHat());
-//        }
+
         adapter = new AudioAdapter(getActivity(), audios);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);

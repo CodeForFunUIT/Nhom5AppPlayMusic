@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <!---fitXY giản nở cho vừa khung imageview-->
-    <ImageView
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/imageviewbackgroundplaylist"
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"></ImageView>
-    <View
-        android:background="@drawable/custon_background_banner"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"></View>
-    <ImageView
-        android:elevation="6dp"
-        android:id="@+id/imageviewplaylist"
-        android:layout_alignBottom="@+id/imageviewbackgroundplaylist"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitXY"></ImageView>
-    <TextView
-        android:textSize="13sp"
-        android:text="nhung bai hit cu"
-        android:layout_alignBottom="@id/imageviewplaylist"
-        android:layout_toRightOf="@id/imageviewplaylist"
-        android:layout_marginLeft="13dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:id="@+id/textviewtenplaylist"
-        android:maxLines="1"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="50dp"
-        android:ellipsize="end"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ></TextView>
+        >
+        <ImageView
+            android:id="@+id/imageviewbackgroundplaylist"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"></ImageView>
+        <View
+            android:background="@drawable/custon_background_banner"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"></View>
+        <ImageView
+            android:elevation="6dp"
+            android:id="@+id/imageviewplaylist"
+            android:layout_alignBottom="@+id/imageviewbackgroundplaylist"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"></ImageView>
+        <TextView
+            android:textSize="13sp"
+            android:text="nhung bai hit cu"
+            android:layout_alignBottom="@id/imageviewplaylist"
+            android:layout_toRightOf="@id/imageviewplaylist"
+            android:layout_marginLeft="13dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@+id/textviewtenplaylist"
+            android:maxLines="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="50dp"
+            android:ellipsize="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></TextView>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

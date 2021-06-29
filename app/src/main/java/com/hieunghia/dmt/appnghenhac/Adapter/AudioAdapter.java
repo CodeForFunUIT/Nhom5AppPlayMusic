@@ -35,6 +35,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewHolder> 
         }
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,8 +61,8 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
-            artist = (TextView) itemView.findViewById(R.id.artist);
+            title = (TextView) itemView.findViewById(R.id.titleaudio);
+            artist = (TextView) itemView.findViewById(R.id.artistaudio);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
