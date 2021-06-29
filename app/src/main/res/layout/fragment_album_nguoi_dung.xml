@@ -8,13 +8,11 @@
     tools:context=".fragment.Fragment_Album_Nguoi_Dung">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_user_playlist"
+            android:id="@+id/recyclerviewalbumuser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/relative_btn_add_playlist" />
+            android:layout_height="wrap_content" />
 
         <RelativeLayout
-            android:id="@+id/relative_btn_add_playlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -32,7 +30,6 @@
                 android:backgroundTint="#F44336"
                 android:src="@drawable/ic_add_album"
                 android:layout_alignParentRight="true" />
-
         </RelativeLayout>
 </LinearLayout>
 

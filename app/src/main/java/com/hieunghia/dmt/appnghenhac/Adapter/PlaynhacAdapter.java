@@ -1,6 +1,8 @@
 package com.hieunghia.dmt.appnghenhac.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHolder> {
     Context context;
     ArrayList<BaiHat> mangbaihat;
+    public static int  iposition = 0;
+    public static boolean isChange = false;
     public PlaynhacAdapter(Context context, ArrayList<BaiHat> mangbaihat)
     {
         this.context = context;
@@ -37,8 +41,18 @@ public class PlaynhacAdapter extends RecyclerView.Adapter<PlaynhacAdapter.ViewHo
         holder.txtcasi.setText(baiHat.getCaSi());
         holder.txtindex.setText(position + 1 +"");
         holder.txttenbaihat.setText(baiHat.getTenBaiHat());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("changepos",position);
+
+                notifyDataSetChanged();
+            }
+        });
 
     }
+
 
     @Override
     public int getItemCount() {
