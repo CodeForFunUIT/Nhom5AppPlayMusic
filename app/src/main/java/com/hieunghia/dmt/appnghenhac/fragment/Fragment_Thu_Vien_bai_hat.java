@@ -28,6 +28,7 @@ import com.hieunghia.dmt.appnghenhac.Model.Audio;
 import com.hieunghia.dmt.appnghenhac.Model.BaiHat;
 import com.hieunghia.dmt.appnghenhac.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -82,7 +83,12 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
         String[] projecttion = {
                 MediaStore.Audio.AudioColumns.TITLE,
                 MediaStore.Audio.AudioColumns.DATA,
-                MediaStore.Audio.AudioColumns.ARTIST
+                MediaStore.Audio.AudioColumns.ARTIST,
+                MediaStore.Audio.AudioColumns._ID,
+                MediaStore.Audio.AudioColumns.DATA,
+                MediaStore.Audio.AudioColumns.ALBUM
+
+
         };
         Cursor cursor = contentResolver.query(uri, projecttion, null, null, null);
 
@@ -92,15 +98,35 @@ public class Fragment_Thu_Vien_bai_hat extends Fragment {
                     audios.add((new Audio(cursor.getString(0)
 
                                           ,cursor.getString(2)
-                                          ,uri.parse(cursor.getString(1)))));
+
+                                          ,cursor.getString(3)
+
+                                          ,cursor.getString(4)
+
+                                          ,cursor.getString(5)
+
+                                          ,uri.parse(cursor.getString(1)
+                    ))));
                 }
             }
             cursor.close();
         }
+        removeFileUnknown(4);
 
         adapter = new AudioAdapter(getActivity(), audios);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+    }
+
+    public void removeFileUnknown(int number){
+        for (int j = 0; j < number; j++){
+            for (int i = 0; i < audios.size(); i++){
+                File file = new File(audios.get(i).getAudioPath());
+                if (!file.exists()){
+                    audios.remove(i);
+                }
+            }
+        }
     }
 }
 

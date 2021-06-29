@@ -12,17 +12,27 @@ public class Audio implements Parcelable  {
     String audioTitle;
     String audioArtist;
     Uri audioUri;
+    String audioid;
+    String audioPath;
+    String audioAlbum;
 
-    public Audio(String audioTitle, String audioArtist, Uri audioUri) {
+
+    public Audio(String audioTitle, String audioArtist, String audioid, String audioPath,String audioAlbum, Uri audioUri ) {
         this.audioTitle = audioTitle;
         this.audioArtist = audioArtist;
         this.audioUri = audioUri;
+        this.audioid = audioid;
+        this.audioPath = audioPath;
+        this.audioAlbum = audioAlbum;
     }
 
     protected Audio(Parcel in) {
         audioTitle = in.readString();
         audioArtist = in.readString();
         audioUri = in.readParcelable(Uri.class.getClassLoader());
+        audioid = in.readString();
+        audioPath = in.readString();
+        audioAlbum = in.readString();
     }
 
     public static final Creator<Audio> CREATOR = new Creator<Audio>() {
@@ -62,6 +72,18 @@ public class Audio implements Parcelable  {
         this.audioUri = audioUri;
     }
 
+    public String getAudioPath() { return audioPath; }
+
+    public void setAudioPath(String audioPath) { this.audioPath = audioPath; }
+
+    public String getAudioid() { return audioid; }
+
+    public void setAudioid(String audioid) { this.audioid = audioid; }
+
+    public String getAudioAlbum() { return audioAlbum; }
+
+    public void setAudioAlbum(String audioAlbum) { this.audioAlbum = audioAlbum; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -72,6 +94,9 @@ public class Audio implements Parcelable  {
         dest.writeString(audioTitle);
         dest.writeString(audioArtist);
         dest.writeParcelable(audioUri, flags);
+        dest.writeString(audioid);
+        dest.writeString(audioPath);
+        dest.writeString(audioAlbum);
     }
 
     public BaiHat converToBaiHat() {
@@ -80,7 +105,6 @@ public class Audio implements Parcelable  {
         baiHat.setCaSi(audioArtist);
         baiHat.setLinkBaiHat(audioUri.toString());
         baiHat.setTenBaiHat(audioTitle);
-        baiHat.setHinhBaiHat("R.drawable.img_disknhac");
 
         return baiHat;
     }

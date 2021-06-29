@@ -1,27 +1,37 @@
 package com.hieunghia.dmt.appnghenhac.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.DownloadManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.hieunghia.dmt.appnghenhac.Adapter.PlaynhacAdapter;
 import com.hieunghia.dmt.appnghenhac.Adapter.ViewPagerPlaylistnhac;
 import com.hieunghia.dmt.appnghenhac.Model.Audio;
@@ -36,6 +46,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import static com.hieunghia.dmt.appnghenhac.Adapter.PlaynhacAdapter.iposition;
+import static com.hieunghia.dmt.appnghenhac.Adapter.PlaynhacAdapter.isChange;
 
 
 public class PlayNhacActivity extends AppCompatActivity {
@@ -251,20 +263,21 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }, 5000);
             }
         });
-
-//        if (PlaynhacAdapter.ChangeSongTo(isChangeSong,positionListSong)){
-//            position = positionListSong;
-//            mediaPlayer.stop();
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//            imgPlay.setImageResource(R.drawable.iconpause);
-//            new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
-//            fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
-//            getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
-//            UpdateSong();
-//        }
     }
-
+//                if (isChange){
+//        isChange = false;
+//        position = iposition;
+//        mediaPlayer.stop();
+//        mediaPlayer.release();
+//        mediaPlayer = null;
+//        imgPlay.setImageResource(R.drawable.iconpause);
+//        new PlayMp3().execute(mangbaihat.get(position).getLinkBaiHat());
+//        fragment_dia_nhac.PlayNhac(mangbaihat.get(position).getHinhBaiHat(), isAudio);
+//        getSupportActionBar().setTitle(mangbaihat.get(position).getTenBaiHat());
+//        UpdateSong();
+//        Toast.makeText(PlayNhacActivity.this, String.valueOf(isChange), Toast.LENGTH_SHORT).show();
+//        Log.d("BBB",String.valueOf(isChange));
+//    }
     private void GetDataInTent() {
         Intent intent = getIntent();
         mangbaihat.clear();
@@ -288,13 +301,14 @@ public class PlayNhacActivity extends AppCompatActivity {
                 ArrayList<BaiHat> baiHatArrayList = intent.getParcelableArrayListExtra("cacbaihat");
                 mangbaihat = baiHatArrayList;
             }
+
         }
     }
 
 
 
     private void init() {
-//        recyclerView = findViewById(R.id.)
+        recyclerView = findViewById(R.id.recyclerviewplaybaihat);
         toolbarplaynhac = findViewById(R.id.toobarplaynhac);
         txtTimeSong = findViewById(R.id.textviewtimesong);
         txtTotaltimesong = findViewById(R.id.textviewtotaltimesong);
@@ -446,5 +460,32 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }
             }
         }, 1000);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(!isAudio)
+        {
+            getMenuInflater().inflate(R.menu.menu_download, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String getUrl = mangbaihat.get(position).getLinkBaiHat();
+
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
+        String title = URLUtil.guessFileName(getUrl,null,null);
+        request.setTitle(title);
+        request.setDescription("Đang tải về...");
+        String cookie = CookieManager.getInstance().getCookie(getUrl);
+        request.addRequestHeader("cookie",cookie);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,title);
+
+        DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        downloadManager.enqueue(request);
+
+        Toast.makeText(this, "Bắt đầu tải!", Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
     }
 }
