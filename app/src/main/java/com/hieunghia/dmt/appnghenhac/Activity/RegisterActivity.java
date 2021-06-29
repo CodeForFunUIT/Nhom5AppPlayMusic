@@ -144,10 +144,9 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
 
-
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-
+                            Toast.makeText(RegisterActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

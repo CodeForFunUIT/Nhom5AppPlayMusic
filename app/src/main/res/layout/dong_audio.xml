@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="10dp"
     android:layout_marginVertical="10dp">
     <RelativeLayout
@@ -9,12 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_all_audio"
+            android:id="@+id/cardviewaudio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            app:cardCornerRadius="10dp">
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/imageaudio"
                 android:src="@drawable/audio"
                 android:scaleType="fitXY"
                 android:layout_width="80dp"
@@ -23,27 +24,33 @@
 
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titleaudio"
+            android:text="ten bai hat "
             android:textSize="20dp"
             android:maxLines="1"
             android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/cardview_all_audio"
+            android:layout_toRightOf="@id/cardviewaudio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+
         <TextView
-            android:id="@+id/artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/artistaudio"
             android:textSize="16dp"
+            android:fontFamily="sans-serif-light"
             android:maxLines="1"
             android:ellipsize="end"
+            android:text="tee ca si"
             android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/cardviewaudio"
+            android:layout_below="@id/titleaudio"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@id/cardview_all_audio"
-            android:layout_below="@id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+/>
     </RelativeLayout>
 
 </RelativeLayout>

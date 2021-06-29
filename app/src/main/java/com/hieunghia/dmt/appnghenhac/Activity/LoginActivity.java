@@ -3,7 +3,9 @@ package com.hieunghia.dmt.appnghenhac.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -75,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     String FaceBookName,FaceBookEmail;
     Uri imgProfile;
     public static Boolean isLogByFaceBook = false;
+    public static SharedPreferences sharedPreferences;
+
 
 
     public static TextView textView;
@@ -154,7 +158,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 name = edtUserName.getText().toString();
                 passWord = edtPassWord.getText().toString();
-
                 if (name.length() > 0 && passWord.length() > 0) {
                     DataService dataService = APIService.GetUserAccount();
                     Call<List<User>> callback = dataService.GetLoginData(name,passWord);
@@ -164,7 +167,6 @@ public class LoginActivity extends AppCompatActivity {
                             ArrayList<User> arrUser = (ArrayList<User>) response.body();
                             if (arrUser.size() > 0)
                             {
-                                // truyền dữ liệu qua mainActivity.
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtra("UserName",arrUser.get(0).getTaiKhoan());
                                 intent.putExtra("UserEmail",arrUser.get(0).getEmail());
@@ -177,9 +179,15 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Tài Khoản này không tồn tại!", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }else{
+                    Toast.makeText(LoginActivity.this, "Xin hãy nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void login(){
+
     }
 
     private void getDataFaceBook() {
@@ -264,11 +272,21 @@ public class LoginActivity extends AppCompatActivity {
         txtnewUser = findViewById(R.id.txtnewuser);
         txtanotherMethods = findViewById(R.id.txtanothermethods);
         relativeLayout = findViewById(R.id.relativeLogin);
+        sharedPreferences = LoginActivity.this.getSharedPreferences("login", Context.MODE_PRIVATE);
+
     }
 
     public void onLoginClick(View View){
         startActivity(new Intent(this,RegisterActivity.class));
         overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+    }
+    private void AutoLogin() {
+        edtUserName.setText(sharedPreferences.getString("username", ""));
+        edtPassWord.setText(sharedPreferences.getString("password", ""));
+        if (!edtPassWord.getText().toString().equals("") && !edtUserName.getText().toString().equals(""))
+        {
+            login();
+        }
     }
 
 
