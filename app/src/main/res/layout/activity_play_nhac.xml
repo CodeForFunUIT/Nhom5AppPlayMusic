@@ -55,53 +55,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></TextView>
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
+
             <ImageButton
-                android:src="@drawable/iconsuffle"
-                android:scaleType="fitXY"
-                android:background="@null"
                 android:id="@+id/imagebuttonsuffle"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"></ImageButton>
-            <ImageButton
-                android:src="@drawable/iconpreview"
-                android:scaleType="fitXY"
                 android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/iconsuffle"></ImageButton>
+
+            <ImageButton
                 android:id="@+id/imagebuttonpreview"
-                android:layout_marginRight="15dp"
-                android:layout_width="60dp"
-                android:layout_height="60dp"></ImageButton>
-            <ImageButton
-                android:src="@drawable/iconplay"
-                android:scaleType="fitXY"
-                android:background="@null"
-                android:id="@+id/imagebuttonplay"
-                android:layout_marginRight="15dp"
-                android:layout_width="70dp"
-                android:layout_height="70dp"></ImageButton>
-            <ImageButton
-                android:src="@drawable/iconnext"
-                android:scaleType="fitXY"
-                android:background="@null"
-                android:id="@+id/imagebuttonnext"
-                android:layout_marginRight="15dp"
-                android:layout_width="60dp"
-                android:layout_height="60dp"></ImageButton>
-            <ImageButton
-                android:src="@drawable/iconrepeat"
-                android:scaleType="fitXY"
-                android:background="@null"
-                android:id="@+id/imagebuttonrepeat"
-                android:layout_marginRight="15dp"
                 android:layout_width="50dp"
-                android:layout_height="50dp"></ImageButton>
+                android:layout_height="50dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/iconpreview"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imagebuttonplay"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/iconplay"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imagebuttonnext"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/iconnext"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/imagebuttonrepeat"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/iconrepeat"></ImageButton>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
