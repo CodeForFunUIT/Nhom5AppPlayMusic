@@ -42,6 +42,7 @@ public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHo
         Album album = albumArrayList.get(position);
         Picasso.with(context).load(album.getHinhAlbum()).into(holder.imgallalbum);
         holder.txttenallalbum.setText(album.getTenAlbum());
+        holder.txtcasialbum1.setText(album.getTenCaSiAlbum());
     }
 
     @Override
@@ -51,11 +52,12 @@ public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHo
 
     public class ViewHoldrer extends RecyclerView.ViewHolder{
         ImageView imgallalbum;
-        TextView txttenallalbum;
+        TextView txttenallalbum,txtcasialbum1;
         public ViewHoldrer(@NonNull View itemView) {
             super(itemView);
             imgallalbum = itemView.findViewById(R.id.imageviewallalbum);
             txttenallalbum = itemView.findViewById(R.id.textviewtenallalbum);
+            txtcasialbum1 = itemView.findViewById((R.id.textviewtencasialbum1));
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

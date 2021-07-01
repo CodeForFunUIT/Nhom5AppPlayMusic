@@ -37,11 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/antic"
-        android:text="Nghe là thích"
+        android:text="NGHE LÀ THÍCH"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="140dp"/>
+        android:layout_marginLeft="120dp"/>
 
 
 </LinearLayout>

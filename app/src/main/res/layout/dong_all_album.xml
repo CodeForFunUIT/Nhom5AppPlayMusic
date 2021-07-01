@@ -33,6 +33,7 @@
     <TextView
         android:textSize="13sp"
         android:text="Variou Artists"
+        android:id="@+id/textviewtencasialbum1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
 </LinearLayout>
