@@ -98,7 +98,7 @@
             style="@style/loginButton"
             android:layout_below="@+id/textviewphone"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="100dp"
             android:layout_toRightOf="@id/imageviewphone"
             android:text="Log out"
