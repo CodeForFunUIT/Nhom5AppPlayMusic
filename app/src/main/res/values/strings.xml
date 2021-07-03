@@ -16,5 +16,7 @@
     <string name="dangxuat">Đăng xuất</string>
 
     <string name="add_album">Thêm Album</string>
+    <string name="channel_name">MUSIC_MP3</string>
+    <string name="channel_description">THIS IS MUSIC MP3</string>
 
 </resources>

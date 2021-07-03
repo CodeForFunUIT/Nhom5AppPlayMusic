@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginButton loginButton ;
     String FaceBookName,FaceBookEmail;
     Uri imgProfile;
+    public static boolean isAvatarNull = true;
     public static Boolean isLogByFaceBook = false;
     public static SharedPreferences sharedPreferences;
 
@@ -171,6 +172,10 @@ public class LoginActivity extends AppCompatActivity {
                                 intent.putExtra("UserName",arrUser.get(0).getTaiKhoan());
                                 intent.putExtra("UserEmail",arrUser.get(0).getEmail());
                                 intent.putExtra("UserPhone",arrUser.get(0).getSoDienThoai());
+                                if(!arrUser.get(0).getHinhanh().equals("")){
+                                    isAvatarNull = false;
+                                    intent.putExtra("UserImage",arrUser.get(0).getHinhanh());
+                                }
                                 startActivity(intent);
                             }
                         }

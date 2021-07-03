@@ -26,6 +26,13 @@ public class QuangCao implements Serializable {
     @Expose
     private String hinhBaiHat;
 
+    @SerializedName("LinkBaiHat")
+    @Expose
+    private String linkBaiHat;
+    @SerializedName("TenCaSi")
+    @Expose
+    private String tenCaSi;
+
     public String getIDQuangCao() {
         return iDQuangCao;
     }
@@ -74,4 +81,11 @@ public class QuangCao implements Serializable {
         this.hinhBaiHat = hinhBaiHat;
     }
 
+    public String getLinkBaiHat() { return linkBaiHat; }
+
+    public void setLinkBaiHat(String linkBaiHat) { this.linkBaiHat = linkBaiHat; }
+
+    public String getTenCaSi() { return tenCaSi; }
+
+    public void setTenCaSi(String tenCaSi) { this.tenCaSi = tenCaSi; }
 }

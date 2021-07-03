@@ -36,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isAvatarNull;
 import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isLogByFaceBook;
 
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private long backtime;
     TabLayout tabLayout;
     ViewPager viewPager;
-    String getName,getPhone,getEmail;
+    String getName,getPhone,getEmail,getPersonImage = null;
     ImageView imageView;
     Uri personPhoto;
     LoginActivity loginActivity;
@@ -68,16 +69,19 @@ public class MainActivity extends AppCompatActivity {
             personPhoto = acct.getPhotoUrl();
             getPhone = "Unknow";
         }
-        else if(true){
+//        else if(true){
 //            getName = loginActivity.getFaceBookName();
 //            getEmail = loginActivity.getFaceBookEmail();
 //            personPhoto = loginActivity.getImgProfile();
-            getPhone = "Unknow";
-        }
+//            getPhone = "Unknow";
+//        }
         else {
             getName = getIntent().getStringExtra("UserName");
             getEmail = getIntent().getStringExtra("UserEmail");
             getPhone = getIntent().getStringExtra("UserPhone");
+            if (!isAvatarNull){
+                getPersonImage = getIntent().getStringExtra("UserImage");
+            }
         }
     }
 
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewPaperAdapter.addFragment(new Fragment_Nguoi_Dung(),"Thiết Bị");
         mainViewPaperAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chủ");
         mainViewPaperAdapter.addFragment(new Fragment_Tim_Kiem(), "Tìm Kiếm");
-        mainViewPaperAdapter.addFragment(new Fragment_Ho_So(), "Hồ Sơ");
+        mainViewPaperAdapter.addFragment(new Fragment_Ho_So(MainActivity.this), "Hồ Sơ");
         viewPager.setAdapter(mainViewPaperAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_phone);
@@ -126,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
     public String getGetEmail() {
         return getEmail;
     }
+    public String getGetPersonImage() { return getPersonImage; }
     public Uri getPersonPhoto() { return personPhoto; }
 
 }
