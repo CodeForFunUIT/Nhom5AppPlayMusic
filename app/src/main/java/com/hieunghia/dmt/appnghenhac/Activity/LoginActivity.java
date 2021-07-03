@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     public static boolean isAvatarNull = true;
     public static Boolean isLogByFaceBook = false;
     public static SharedPreferences sharedPreferences;
-
+    public static ArrayList<User> arrUser;
 
 
     public static TextView textView;
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                     callback.enqueue(new Callback<List<User>>() {
                         @Override
                         public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                            ArrayList<User> arrUser = (ArrayList<User>) response.body();
+                            arrUser = (ArrayList<User>) response.body();
                             if (arrUser.size() > 0)
                             {
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -305,5 +305,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public Uri getImgProfile() {
         return imgProfile;
+    }
+
+    public void onForgetClick(View view) {
+        Intent intent = new Intent(this, ForgetPassWordActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
     }
 }
