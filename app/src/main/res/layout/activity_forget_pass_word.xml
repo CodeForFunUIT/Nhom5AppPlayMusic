@@ -55,7 +55,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nhập Email bạn đã đăng kí."
-                            android:textSize="28sp"
+                            android:textSize="27sp"
                             android:textColor="#E91E63"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +76,19 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputMobile"
                         style="@style/parent"
-                        android:layout_marginTop="@dimen/loginViewsMargin"/>
+                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        <TextView
+                            android:id="@+id/txtTakePassWord"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhập Email bạn đã đăng kí."
+                            android:textSize="18sp"
+                            android:textColor="#E91E63"
+                            android:maxLines="1"
+                            android:visibility="invisible"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputPassword"
@@ -119,7 +131,8 @@
                     android:text="Use other Methods"
                     android:textAlignment="center"
                     android:textColor="@color/whiteTextColor"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
 
                 <View
                     android:layout_width="0dp"
