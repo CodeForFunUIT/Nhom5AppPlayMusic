@@ -23,6 +23,10 @@ public class User implements Parcelable {
     @Expose
     private String soDienThoai;
 
+    @SerializedName("HinhAnh")
+    @Expose
+    private String hinhanh;
+
     protected User(Parcel in) {
         id = in.readString();
         taiKhoan = in.readString();
@@ -80,6 +84,10 @@ public class User implements Parcelable {
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
     }
+
+    public String getHinhanh() { return hinhanh; }
+
+    public void setHinhanh(String hinhanh) { this.hinhanh = hinhanh; }
 
     @Override
     public int describeContents() {
