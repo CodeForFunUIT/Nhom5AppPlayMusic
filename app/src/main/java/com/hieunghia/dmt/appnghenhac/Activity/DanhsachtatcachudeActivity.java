@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.hieunghia.dmt.appnghenhac.Adapter.DanhsachtatcachudeAdapter;
 import com.hieunghia.dmt.appnghenhac.Model.ChuDe;
@@ -33,6 +34,7 @@ public class DanhsachtatcachudeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachtatcachude);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         init();
         GetDaTa();
     }

@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Activity.DanhsachbaihatActivity"
-    android:id="@+id/coordinatorlayout">
+    android:id="@+id/coordinatorlayout"
+    android:background="@drawable/bacround_gradient">
 
     <com.google.android.material.appbar.AppBarLayout
         android:fitsSystemWindows="true"
@@ -48,18 +49,20 @@
             </ImageView>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:backgroundTint="#a845de"
-        android:src="@drawable/iconfloatingactionbutton"
         android:scaleType="fitXY"
+        android:text="Phát tất cả "
+        android:textSize="20sp"
+        android:textColor="@color/white"
         app:fabSize="normal"
         android:id="@+id/floatingactionbutton"
         app:layout_anchorGravity="bottom|center"
         app:layout_anchor="@id/appbarlayout"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </br.com.simplepass.loadingbutton.customViews.CircularProgressButton>
     <androidx.core.widget.NestedScrollView
         android:layout_marginTop="30dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

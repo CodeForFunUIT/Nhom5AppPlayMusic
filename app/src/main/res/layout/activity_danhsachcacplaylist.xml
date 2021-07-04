@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Danhsachcacplaylist">
+    tools:context=".Activity.Danhsachcacplaylist"
+    android:background="@drawable/bacround_gradient">
     <androidx.appcompat.widget.Toolbar
 
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

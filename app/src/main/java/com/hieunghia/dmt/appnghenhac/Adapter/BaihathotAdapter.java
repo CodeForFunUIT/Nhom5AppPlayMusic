@@ -65,7 +65,7 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
             txtten = itemView.findViewById(R.id.textviewtenbaihathot);
             txtcasi = itemView.findViewById(R.id.textviewtencasibaihathot);
             imghinh = itemView.findViewById(R.id.imageviewbaihathot);
-            imgluotthich = itemView.findViewById(R.id.imageviewluotyeuthich);
+//            imgluotthich = itemView.findViewById(R.id.imageviewluotyeuthich);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -74,32 +74,32 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                     context.startActivity(intent);
                 }
             });
-            imgluotthich.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    imgluotthich.setImageResource(R.drawable.iconloved);
-                    DataService dataService = APIService.getService();
-                    Call<String> callback = dataService.UpdateLuotThich("1", baiHatArrayList.get(getPosition()).getIDBaiHat());
-                    callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String ketqua = response.body();
-                            if (ketqua.equals("thanhcong")){
-                                Toast.makeText(context, "đã thích",Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(context, "bị lỗi!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-
-                        }
-                    });
-                    imgluotthich.setEnabled(false);
-                }
-            });
+//            imgluotthich.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    imgluotthich.setImageResource(R.drawable.iconloved);
+//                    DataService dataService = APIService.getService();
+//                    Call<String> callback = dataService.UpdateLuotThich("1", baiHatArrayList.get(getPosition()).getIDBaiHat());
+//                    callback.enqueue(new Callback<String>() {
+//                        @Override
+//                        public void onResponse(Call<String> call, Response<String> response) {
+//                            String ketqua = response.body();
+//                            if (ketqua.equals("thanhcong")){
+//                                Toast.makeText(context, "đã thích",Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                Toast.makeText(context, "bị lỗi!",Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<String> call, Throwable t) {
+//
+//                        }
+//                    });
+//                    imgluotthich.setEnabled(false);
+//                }
+//            });
         }
     }
 }

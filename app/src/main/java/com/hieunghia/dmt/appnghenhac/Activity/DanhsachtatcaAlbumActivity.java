@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.hieunghia.dmt.appnghenhac.Adapter.AllAlbumAdapter;
 import com.hieunghia.dmt.appnghenhac.Model.Album;
@@ -31,6 +32,7 @@ public class DanhsachtatcaAlbumActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_danhsachtatca_album);
         init();
         GetDaTa();

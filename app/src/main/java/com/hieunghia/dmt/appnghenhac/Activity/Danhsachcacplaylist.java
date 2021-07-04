@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.hieunghia.dmt.appnghenhac.Adapter.DanhsachcacplaylistAdapter;
 import com.hieunghia.dmt.appnghenhac.Model.PlayList;
@@ -32,6 +33,7 @@ public class Danhsachcacplaylist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachcacplaylist);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         anhxa();
         init();
         GetDaTa();
