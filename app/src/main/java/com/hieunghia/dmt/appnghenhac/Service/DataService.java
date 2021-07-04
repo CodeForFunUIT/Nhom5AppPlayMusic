@@ -80,7 +80,7 @@ public interface DataService {
                             @Field("sodienthoai") String sodienthoai);
     @FormUrlEncoded
     @POST("userLogin.php")
-    Call<List<User>> GetLoginData(@Field("taikhoan") String taikhoan,
+    Call<List<User>> GetLoginData(@Field("email") String email,
                                @Field("matkhau") String matkhau);
 
     @FormUrlEncoded

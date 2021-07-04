@@ -27,7 +27,6 @@
         android:paddingLeft="5dp"
         android:layout_below="@+id/listviewplaylist"
         android:id="@+id/textviewmoreplaylist"
-        android:background="#c9c7c7"
         android:layout_marginTop="8dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"

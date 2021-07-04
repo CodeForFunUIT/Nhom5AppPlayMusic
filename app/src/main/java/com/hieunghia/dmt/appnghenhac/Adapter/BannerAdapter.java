@@ -60,10 +60,16 @@ public class BannerAdapter extends PagerAdapter {
         txttitlesongbanner.setText(arrayListbanner.get(position).getTenBaiHat());
         txtnoidung.setText(arrayListbanner.get(position).getNoiDung());
 
-        baiHat.setLinkBaiHat(arrayListbanner.get(position).getLinkBaiHat());
-        baiHat.setCaSi(arrayListbanner.get(position).getTenCaSi());
-        baiHat.setHinhBaiHat(arrayListbanner.get(position).getHinhBaiHat());
-        baiHat.setTenBaiHat(arrayListbanner.get(position).getTenBaiHat());
+        if (position > 0){
+            baiHat.setLinkBaiHat(arrayListbanner.get(position-1).getLinkBaiHat());
+            baiHat.setCaSi(arrayListbanner.get(position-1).getTenCaSi());
+            baiHat.setHinhBaiHat(arrayListbanner.get(position-1).getHinhBaiHat());
+            baiHat.setTenBaiHat(arrayListbanner.get(position-1).getTenBaiHat());
+        }
+
+
+
+
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

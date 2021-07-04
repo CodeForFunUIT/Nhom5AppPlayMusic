@@ -18,6 +18,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ActionMenuView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,7 +55,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     RecyclerView recyclerViewdanhsachbaihat;
-    FloatingActionButton floatingActionButton;
+    CircularProgressButton floatingActionButton;
     ImageView imgdanhsachcakhuc;
     ArrayList<BaiHat> mangbaihat;
     ActionBar actionBar;
@@ -68,6 +70,7 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_danhsachbaihat);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // kiểm tra tín hiệu mạng
         StrictMode.setThreadPolicy(policy);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         DataIntent();
         anhxa();
         init();
@@ -186,7 +189,6 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
     }
 
     private void init() {
-        // calling the action bar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

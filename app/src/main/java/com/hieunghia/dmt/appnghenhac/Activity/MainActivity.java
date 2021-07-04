@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isAvatarNull;
-import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isLogByFaceBook;
+import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isLogByGoogle;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,10 +46,9 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     String getName,getPhone,getEmail,getPersonImage = null;
-    ImageView imageView;
     Uri personPhoto;
     LoginActivity loginActivity;
-    private static final int READ_EXtERNAL_STORAGE = 1;
+    Boolean isNoWifi = false;
     public static int progress;
     public static ProgressBar progressBar;
 
@@ -69,12 +68,6 @@ public class MainActivity extends AppCompatActivity {
             personPhoto = acct.getPhotoUrl();
             getPhone = "Unknow";
         }
-//        else if(true){
-//            getName = loginActivity.getFaceBookName();
-//            getEmail = loginActivity.getFaceBookEmail();
-//            personPhoto = loginActivity.getImgProfile();
-//            getPhone = "Unknow";
-//        }
         else {
             getName = getIntent().getStringExtra("UserName");
             getEmail = getIntent().getStringExtra("UserEmail");
@@ -87,17 +80,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         MainViewPaperAdapter mainViewPaperAdapter = new MainViewPaperAdapter(getSupportFragmentManager());
-        mainViewPaperAdapter.addFragment(new Fragment_Nguoi_Dung(),"Thiết Bị");
-        mainViewPaperAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chủ");
-        mainViewPaperAdapter.addFragment(new Fragment_Tim_Kiem(), "Tìm Kiếm");
-        mainViewPaperAdapter.addFragment(new Fragment_Ho_So(MainActivity.this), "Hồ Sơ");
-        viewPager.setAdapter(mainViewPaperAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_phone);
-        tabLayout.getTabAt(1).setIcon(R.drawable.icontrangchu2);
-        tabLayout.getTabAt(2).setIcon(R.drawable.icsearch);
-        tabLayout.getTabAt(3).setIcon(R.drawable.iconhoso2);
-
+        isNoWifi = getIntent().getBooleanExtra("nowifi",false);
+        if (!isNoWifi){
+            mainViewPaperAdapter.addFragment(new Fragment_Thu_Vien_bai_hat(),"Thiết Bị");
+            mainViewPaperAdapter.addFragment(new Fragment_Trang_Chu(), "Trang chủ");
+            mainViewPaperAdapter.addFragment(new Fragment_Tim_Kiem(), "Tìm Kiếm");
+            mainViewPaperAdapter.addFragment(new Fragment_Ho_So(MainActivity.this), "Hồ Sơ");
+            viewPager.setAdapter(mainViewPaperAdapter);
+            tabLayout.setupWithViewPager(viewPager);
+            tabLayout.getTabAt(0).setIcon(R.drawable.ic_phone);
+            tabLayout.getTabAt(1).setIcon(R.drawable.icontrangchu2);
+            tabLayout.getTabAt(2).setIcon(R.drawable.icsearch);
+            tabLayout.getTabAt(3).setIcon(R.drawable.iconhoso2);
+        }else {
+            mainViewPaperAdapter.addFragment(new Fragment_Thu_Vien_bai_hat(),"Thiết Bị");
+            viewPager.setAdapter(mainViewPaperAdapter);
+            tabLayout.setupWithViewPager(viewPager);
+            tabLayout.getTabAt(0).setIcon(R.drawable.ic_phone);
+        }
     }
 
     private void anhxa() {

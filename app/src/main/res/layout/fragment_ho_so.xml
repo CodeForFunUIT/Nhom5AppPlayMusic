@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Amanda Burque"
+            android:text="Hello World"
             android:textColor="#ECE3E3"
             android:textSize="25sp"/>
 
@@ -30,8 +30,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
-        android:layout_width="126dp"
-        android:layout_height="109dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
@@ -80,7 +80,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
-            android:text="abozquet@biscainepark.org"
+            android:text="abc@gmail.com"
             android:textSize="18sp"
             android:layout_toRightOf="@+id/imageviewemail"/>
 
@@ -100,7 +100,7 @@
             android:layout_width="239dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="1 (786) 352-2254"
+            android:text="04995959596"
             android:textSize="18sp"
             android:layout_toRightOf="@+id/imageviewphone"
             android:layout_below="@+id/textviewemail"

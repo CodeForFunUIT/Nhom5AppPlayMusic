@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -66,18 +67,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
     EditText edtUserName,edtPassWord;
-    ImageView imgView,imgFaceBook,imgGoogle;
+    ImageView imgView;
+    Button btnGoogle, btnNoWiFi;
     CircularProgressButton crpLogin;
-    String name,passWord;
+    String email,passWord;
     TextView txtforgetPass, txtnewUser, txtanotherMethods;
     RelativeLayout relativeLayout;
     public static GoogleSignInClient mGoogleSignInClient;
     CallbackManager callbackManager;
-    LoginButton loginButton ;
     String FaceBookName,FaceBookEmail;
     Uri imgProfile;
     public static boolean isAvatarNull = true;
-    public static Boolean isLogByFaceBook = false;
+    public static Boolean isLogByGoogle = true;
     public static SharedPreferences sharedPreferences;
     public static ArrayList<User> arrUser;
 
@@ -89,15 +90,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Init();
-        //for changing status bar icon colors
+
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         callbackManager = CallbackManager.Factory.create();
-        loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
 
-//         Configure sign-in to request the user's ID, email address, and basic
-// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -106,68 +104,35 @@ public class LoginActivity extends AppCompatActivity {
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_ICON_ONLY);
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
-
-        imgGoogle.setOnClickListener(new View.OnClickListener() {
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
         });
 
-        imgFaceBook.setOnClickListener(new View.OnClickListener() {
+        btnNoWiFi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(LoginActivity.this, "cancel", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                loginWithoutWifi();
             }
         });
 
         crpLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = edtUserName.getText().toString();
+                email = edtUserName.getText().toString();
                 passWord = edtPassWord.getText().toString();
-                if (name.length() > 0 && passWord.length() > 0) {
+                if (email.length() > 0 && passWord.length() > 0) {
                     DataService dataService = APIService.GetUserAccount();
-                    Call<List<User>> callback = dataService.GetLoginData(name,passWord);
+                    Call<List<User>> callback = dataService.GetLoginData(email,passWord);
                     callback.enqueue(new Callback<List<User>>() {
                         @Override
                         public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                             arrUser = (ArrayList<User>) response.body();
                             if (arrUser.size() > 0)
                             {
+                                isLogByGoogle = false;
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtra("UserName",arrUser.get(0).getTaiKhoan());
                                 intent.putExtra("UserEmail",arrUser.get(0).getEmail());
@@ -191,34 +156,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void login(){
-
-    }
-
-    private void getDataFaceBook() {
-        GraphRequest graphRequest =  GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        try {
-                            Toast.makeText(LoginActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                            FaceBookName = object.getString("name");
-                            FaceBookEmail = object.getString("email");
-                            imgProfile = Uri.parse("https://graph.facebook.com/" + object.getString("id") + "/picture?type=large");
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-        Bundle bundle = new Bundle();
-        bundle.putString("fields","email, name , id");
-
-        graphRequest.setParameters(bundle);
-        graphRequest.executeAsync();
+    private void loginWithoutWifi(){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("nowifi", true);
+        startActivity(intent);
     }
 
     private void signIn() {
+        isLogByGoogle = true;
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -226,38 +171,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-        }else {
-            callbackManager.onActivityResult(requestCode,resultCode,data);
-
         }
     }
-//    AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-//        @Override
-//        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-//            if (currentAccessToken == null){
-//                LoginManager.getInstance().logOut();
-//            }
-//        }
-//    };
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        accessTokenTracker.stopTracking();
-//    }
 
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         } catch (ApiException e) {
 
@@ -266,13 +189,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void Init() {
-        loginButton =(LoginButton) findViewById(R.id.login_button);
+        btnNoWiFi = findViewById(R.id.loginWithoutWifi);
+        btnGoogle = findViewById(R.id.loginGmail);
         edtUserName = findViewById(R.id.edtTextName);
         edtPassWord = findViewById(R.id.edtTextPassword);
         crpLogin = findViewById(R.id.cirLoginButton);
         imgView = findViewById(R.id.imageviewbackgroundlogin);
-        imgGoogle = findViewById(R.id.imageviewbackgroundgoogle);
-        imgFaceBook = findViewById(R.id.imageviewbackgroundfacebook);
         txtforgetPass = findViewById(R.id.txtforgetpass);
         txtnewUser = findViewById(R.id.txtnewuser);
         txtanotherMethods = findViewById(R.id.txtanothermethods);
@@ -290,7 +212,7 @@ public class LoginActivity extends AppCompatActivity {
         edtPassWord.setText(sharedPreferences.getString("password", ""));
         if (!edtPassWord.getText().toString().equals("") && !edtUserName.getText().toString().equals(""))
         {
-            login();
+//            login();
         }
     }
 

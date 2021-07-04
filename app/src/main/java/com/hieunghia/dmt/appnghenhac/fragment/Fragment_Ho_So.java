@@ -55,6 +55,7 @@ import retrofit2.http.Multipart;
 
 import static android.app.Activity.RESULT_OK;
 import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isAvatarNull;
+import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.isLogByGoogle;
 import static com.hieunghia.dmt.appnghenhac.Activity.LoginActivity.mGoogleSignInClient;
 
 public class Fragment_Ho_So extends Fragment {
@@ -93,7 +94,11 @@ public class Fragment_Ho_So extends Fragment {
         btnEditImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SelectImageUpload(RequestAvatar);
+                if (isLogByGoogle){
+                    Toast.makeText(mainActivity, "Xin hãy đăng nhập tài khoản bạn đã đăng kí để chỉnh sửa ảnh!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    SelectImageUpload(RequestAvatar);
             }
         });
 
@@ -227,6 +232,8 @@ public class Fragment_Ho_So extends Fragment {
         if (!isAvatarNull){
             Picasso.with(context).load(mainActivity.getGetPersonImage()).into(circleImageView);
             Log.d("BBB",String.valueOf(isAvatarNull));
+        }if (isLogByGoogle){
+            Picasso.with(context).load(mainActivity.getPersonPhoto()).into(circleImageView);
         }
     }
 }
