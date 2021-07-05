@@ -154,6 +154,8 @@ public class DanhsachbaihatActivity extends AppCompatActivity {
 
     private void setValueInView(String ten, String hinh) {
         collapsingToolbarLayout.setTitle(ten);
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
         try {
             URL url = new URL(hinh);
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream()); // covert dưới dạng bit map mới gắn dữ liệu lên.
