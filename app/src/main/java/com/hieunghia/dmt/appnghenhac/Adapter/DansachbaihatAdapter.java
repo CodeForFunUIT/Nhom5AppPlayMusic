@@ -66,33 +66,7 @@ public class DansachbaihatAdapter extends RecyclerView.Adapter<DansachbaihatAdap
             txtcasi = itemView.findViewById(R.id.textviewtencasi);
             txtindex = itemView.findViewById(R.id.textviewdanhsachindex);
             txttenbaihat = itemView.findViewById(R.id.textviewdanhsachtenbaihat);
-            imgluotthich = itemView.findViewById(R.id.imageviewcholuotthichdanhsachbaihat);
-            imgluotthich.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    imgluotthich.setImageResource(R.drawable.iconloved);
-                    DataService dataService = APIService.getService();
-                    Call<String> callback = dataService.UpdateLuotThich("1", mangbaihat.get(getPosition()).getIDBaiHat());
-                    callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String ketqua = response.body();
-                            if (ketqua.equals("thanhcong")){
-                                Toast.makeText(context, "đã thích",Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(context, "bị lỗi!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-
-                        }
-                    });
-                    imgluotthich.setEnabled(false);
-                }
-            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

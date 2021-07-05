@@ -104,13 +104,6 @@ public class LoginActivity extends AppCompatActivity {
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_ICON_ONLY);
 
-        btnGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
-
         btnNoWiFi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +183,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Init() {
         btnNoWiFi = findViewById(R.id.loginWithoutWifi);
-        btnGoogle = findViewById(R.id.loginGmail);
         edtUserName = findViewById(R.id.edtTextName);
         edtPassWord = findViewById(R.id.edtTextPassword);
         crpLogin = findViewById(R.id.cirLoginButton);
