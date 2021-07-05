@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Tiếp tục với Google hoặc không có mạng"
+                    android:text="Tiếp tục khi không có mạng."
                     android:textAlignment="center"
                     android:textSize="12sp"
                     android:gravity="center_horizontal" />
@@ -141,20 +141,6 @@
                 android:gravity="center">
 
                 <Button
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/loginGmail"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
-                    android:elevation="30dp"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginEnd="36dp"
-                    android:background="@drawable/rounded_button"
-                    android:backgroundTint="#DC4E7E"
-                    android:drawableLeft="@drawable/ic_google"
-                    android:text="Đăng nhập với Google"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
-                <Button
                     android:id="@+id/loginWithoutWifi"
                     android:layout_centerHorizontal="true"
                     android:layout_width="200dp"
@@ -167,7 +153,7 @@
                     android:backgroundTint="#DC4E7E"
                     android:drawableLeft="@drawable/ic_no_wifi"
                     android:text="Đăng nhập Không cần wifi"
-                    android:layout_below="@+id/loginGmail"
+
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 

@@ -42,14 +42,6 @@
             android:id="@+id/textviewtencasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
-        <ImageView
-            android:src="@drawable/iconlove"
-            android:layout_marginRight="5dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/imageviewcholuotthichdanhsachbaihat"
-            android:layout_width="30dp"
-            android:layout_height="30dp"></ImageView>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
