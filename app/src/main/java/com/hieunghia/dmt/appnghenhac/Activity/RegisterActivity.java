@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText edtName, edtPassword, edtEmail, edtPhonNumber, edtRePassWord;
     CircularProgressButton crpRegister;
     String userName, userPassWord, userEmail, userPhoneNumber;
-
+    Boolean isValied = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!validateMobile(edtPhonNumber.getText().toString())){
-                    edtPhonNumber.setError("Invalid Mobile No");
+                    edtPhonNumber.setError("Điện thoại không hợp lệ!");
+                    isValied = false;
                 }
             }
 
@@ -69,7 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(!validateEmail(edtEmail.getText().toString().trim())){
-                    edtEmail.setError("Invalid Email");
+                    edtEmail.setError("Email không hợp lệ!");
+                    isValied = false;
                 }
             }
 
@@ -87,7 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!validatePassWord(edtPassword.getText().toString().trim())){
-                    edtPassword.setError("Password must be longer 6 characters");
+                    edtPassword.setError("Mật khẩu phải lớn hơn 6 kí tự!");
+                    isValied = false;
                 }
             }
 
@@ -105,7 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!validateRePassWord(edtPassword.getText().toString().trim())){
-                    edtRePassWord.setError("Wrong PassWord");
+                    edtRePassWord.setError("Sai mật khẩu!");
+                    isValied = false;
                 }
             }
 
@@ -117,44 +121,52 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void evenClick() {
-        crpRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userName = edtName.getText().toString();
-                userPassWord = edtPassword.getText().toString();
-                userEmail = edtEmail.getText().toString();
-                userPhoneNumber = edtPhonNumber.getText().toString();
-                if (userName.length() > 0 && userPassWord.length() > 0 && userEmail.length() > 0 && userPhoneNumber.length() > 0)
-                {
-                    DataService dataService = APIService.GetUserAccount();
-                    retrofit2.Call<String> callback = dataService.InsertData(userName,userPassWord,userEmail,userPhoneNumber);
-                    callback.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            String result = response.body();
-                            if (result.equals("Success")){
-                                Toast.makeText(RegisterActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                            else if (result.equals("UserNameHaveBeenUsed")){
-                                Toast.makeText(RegisterActivity.this, "     Tài khoản đã đăng kí \n  Xin hãy đăng kí tên tài khoản khác", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (result.equals("EmailHaveBeenUsed")){
-                                Toast.makeText(RegisterActivity.this, "         Email đã đăng kí \n  Xin hãy đăng kí tên tài khoản khác", Toast.LENGTH_SHORT).show();
-                            }
-                        }
 
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(RegisterActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
+            crpRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (validateMobile(edtPhonNumber.getText().toString()) && validateEmail(edtEmail.getText().toString().trim())
+                            && validatePassWord(edtPassword.getText().toString().trim()) && validateRePassWord(edtPassword.getText().toString().trim())){
+                        userName = edtName.getText().toString();
+                        userPassWord = edtPassword.getText().toString();
+                        userEmail = edtEmail.getText().toString();
+                        userPhoneNumber = edtPhonNumber.getText().toString();
+                        if (userName.length() > 0 && userPassWord.length() > 0 && userEmail.length() > 0 && userPhoneNumber.length() > 0)
+                        {
+                            DataService dataService = APIService.GetUserAccount();
+                            retrofit2.Call<String> callback = dataService.InsertData(userName,userPassWord,userEmail,userPhoneNumber);
+                            callback.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    String result = response.body();
+                                    if (result.equals("Success")){
+                                        Toast.makeText(RegisterActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                    else if (result.equals("UserNameHaveBeenUsed")){
+                                        Toast.makeText(RegisterActivity.this, "     Tài khoản đã đăng kí \n  Xin hãy đăng kí tên tài khoản khác", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (result.equals("EmailHaveBeenUsed")){
+                                        Toast.makeText(RegisterActivity.this, "         Email đã đăng kí \n  Xin hãy đăng kí tên tài khoản khác", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                    Toast.makeText(RegisterActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
-                    });
+                        else {
+                            Toast.makeText(RegisterActivity.this,"Hãy nhập đủ thông tin!",Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(RegisterActivity.this, "Thông tin không chính xác!", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-                else {
-                    Toast.makeText(RegisterActivity.this,"Hãy nhập đủ thông tin!",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+            });
+
     }
 
 

@@ -1,22 +1,30 @@
 package com.hieunghia.dmt.appnghenhac.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -448,5 +456,32 @@ public class PlayNhacActivity extends AppCompatActivity {
                 }
             }
         }, 1000);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(!isAudio)
+        {
+            getMenuInflater().inflate(R.menu.menu_download, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String getUrl = mangbaihat.get(position).getLinkBaiHat();
+
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(getUrl));
+        String title = URLUtil.guessFileName(getUrl,null,null);
+        request.setTitle(title);
+        request.setDescription("Đang tải về...");
+        String cookie = CookieManager.getInstance().getCookie(getUrl);
+        request.addRequestHeader("cookie",cookie);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,title);
+
+        DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        downloadManager.enqueue(request);
+
+        Toast.makeText(this, "Bắt đầu tải!", Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
     }
 }
